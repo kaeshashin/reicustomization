@@ -133,40 +133,57 @@ h3 {
 <div class="reirei">
 <div id="character">
     <img id="shoes" src="rei_shoes.png">
-  <img id="clothes" src="rei_dress.png">
-   <img id="head" src="rei_head.png">
+    <img id="clothes" src="rei_dress.png">
+    <img id="head" src="rei_head.png">
 </div>
 </div>
 <!-- CONTROL PANEL -->
 <div class="panel">
+  <div class="options">
+    <div class="group">
+      <h3>REI'S FACE</h3>
+      <img src="melodyhead.jpeg" onclick="changePart('head','melody_head.png')" style="border-color: rgb(229, 71, 176);">
+      <img src="kuromihead.jpeg" onclick="changePart('head','kuromi_head.png')" style="border-color: rgb(174, 71, 229);">
+      <img src="reihead.jpeg" onclick="changePart('head','rei_head.png')" style="border-color: rgb(229, 145, 71);">
+    </div>
 
-<div class="options">
+    <div class="group">
+      <h3>REI'S OUTFITS</h3>
+      <img src="melodydress.jpeg" onclick="changePart('clothes','melody_dress.png')" style="border-color: rgb(229, 71, 176);">
+      <img src="kuromidress.jpeg" onclick="changePart('clothes','kuromi_dress.png')" style="border-color: rgb(174, 71, 229);">
+      <img src="reidress.jpeg" onclick="changePart('clothes','rei_dress.png')" style="border-color: rgb(229, 145, 71);">
+    </div>
 
-  <div class="group">
-    <h3>REI'S FACE</h3>
-    <img src="melodyhead.jpeg" onclick="changePart('head','melody_head.png')" style="border-color: rgb(229, 71, 176);">
-  <img src="kuromihead.jpeg" onclick="changePart('head','kuromi_head.png')" style="border-color: rgb(174, 71, 229);">
-  <img src="reihead.jpeg" onclick="changePart('head','rei_head.png')" style="border-color: rgb(229, 145, 71);">
+    <div class="group">
+      <h3>REI'S SHOES</h3>
+      <img src="melodyshoes.jpeg" onclick="changePart('shoes','melody_shoes.png')" style="border-color: rgb(229, 71, 176);">
+      <img src="kuromishoes.jpeg" onclick="changePart('shoes','kuromi_shoes.png')" style="border-color: rgb(174, 71, 229);">
+      <img src="reishoes.jpeg" onclick="changePart('shoes','rei_shoes.png')" style="border-color: rgb(229, 145, 71);">
+    </div>
   </div>
-
-  <div class="group">
-    <h3>REI'S OUTFITS</h3>
-    <img src="melodydress.jpeg" onclick="changePart('clothes','melody_dress.png')" style="border-color: rgb(229, 71, 176);">
-  <img src="kuromidress.jpeg" onclick="changePart('clothes','kuromi_dress.png')" style="border-color: rgb(174, 71, 229);">
-  <img src="reidress.jpeg" onclick="changePart('clothes','rei_dress.png')" style="border-color: rgb(229, 145, 71);">
-  </div>
-
-  <div class="group">
-    <h3>REI'S SHOES</h3>
-   <img src="melodyshoes.jpeg" onclick="changePart('shoes','melody_shoes.png')" style="border-color: rgb(229, 71, 176);">
-  <img src="kuromishoes.jpeg" onclick="changePart('shoes','kuromi_shoes.png')" style="border-color: rgb(174, 71, 229);">
-  <img src="reishoes.jpeg" onclick="changePart('shoes','rei_shoes.png')" style="border-color: rgb(229, 145, 71);">
-  </div>
-
-</div>
 </div>
 </div>
 <script>
+
+  loadSavedParts();
+
+function loadSavedParts() {
+  const head = localStorage.getItem("head");
+  const clothes = localStorage.getItem("clothes");
+  const shoes = localStorage.getItem("shoes");
+
+  console.log("Loading saved parts:", { head, clothes, shoes });
+  
+  if (head) {
+    document.getElementById("head").src = head;
+  }
+  if (clothes) {
+    document.getElementById("clothes").src = clothes;
+  }
+  if (shoes) {
+    document.getElementById("shoes").src = shoes;
+  }
+}
 
 /* SHOW CATEGORY */
 function showCategory(category) {
@@ -180,6 +197,7 @@ function showCategory(category) {
 /* CHANGE PART */
 function changePart(partId, newSrc) {
   const el = document.getElementById(partId);
+  localStorage.setItem(partId, newSrc);
 
   anime({
     targets: el,
